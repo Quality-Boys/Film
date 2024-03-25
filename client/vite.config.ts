@@ -8,11 +8,11 @@ import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 export default defineConfig({
     // 本地测试环境
     server: {
-        host: '0.0.0.0',
+        host: '120.55.89.72',
         port: 3600,
         proxy: {
             "/api": {
-                target: `http://127.0.0.1:3601`,
+                target: `http://120.55.89.72:3601`,
                 changeOrigin: true, // 允许跨域
                 rewrite: path => path.replace(/^\/api/, '')
             }
