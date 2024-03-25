@@ -98,7 +98,7 @@ const (
 		RedisPassword redis访问密码
 		RedisDBNo 使用第几号库
 	*/
-	RedisAddr     = `120.55.89.72:6379`
+	RedisAddr     = "120.55.89.72:6379"
 	RedisPassword = "2333tv.top"
 	RedisDBNo     = 0
 
