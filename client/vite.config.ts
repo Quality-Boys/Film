@@ -8,7 +8,7 @@ import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 export default defineConfig({
     // 本地测试环境
     server: {
-        host: '0.0.0.0',
+        host: '120.55.89.72',
         port: 3600,
         proxy: {
             "/api": {
