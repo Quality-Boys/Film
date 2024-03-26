@@ -34,7 +34,7 @@ func start() {
 	DefaultDataInit()
 	// 开启路由监听
 	r := router.SetupRouter()
-	_ = r.Run(fmt.Sprintf(":%s", config.ListenerPort))
+	_ = r.Run(fmt.Sprintf("120.55.89.72:%s", config.ListenerPort))
 }
 
 func DefaultDataInit() {
