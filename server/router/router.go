@@ -15,8 +15,7 @@ func SetupRouter() *gin.Engine {
 
 	// 静态资源配置
 	r.Static(config.FilmPictureUrlPath, config.FilmPictureUploadDir)
-
-	r.GET(`/index`, controller.Index)
+	r.GET(`api/index`, controller.Index)
 	r.GET(`/config/basic`, controller.SiteBasicConfig)
 	r.GET(`/navCategory`, controller.CategoriesInfo)
 	r.GET(`/filmDetail`, controller.FilmDetail)
