@@ -12,24 +12,26 @@ func SetupRouter() *gin.Engine {
 	r := gin.Default()
 	// 开启跨域
 	r.Use(middleware.Cors())
-
-	// 静态资源配置
 	r.Static(config.FilmPictureUrlPath, config.FilmPictureUploadDir)
-	r.GET(`api/index`, controller.Index)
-	r.GET(`/config/basic`, controller.SiteBasicConfig)
-	r.GET(`/navCategory`, controller.CategoriesInfo)
-	r.GET(`/filmDetail`, controller.FilmDetail)
-	r.GET(`/filmPlayInfo`, controller.FilmPlayInfo)
-	r.GET(`/searchFilm`, controller.SearchFilm)
-	r.GET(`/filmClassify`, controller.FilmClassify)
-	r.GET(`/filmClassifySearch`, controller.FilmTagSearch)
-	//r.GET(`/filmCategory`, controller.FilmCategory) 弃用
-	r.POST(`/login`, controller.Login)
-	r.GET(`/logout`, middleware.AuthToken(), controller.Logout)
-	r.POST(`/changePassword`, middleware.AuthToken(), controller.UserPasswordChange)
+	// 静态资源配置
+	api := r.Group("/api")
+	{
+		api.GET(`/index`, controller.Index)
+		api.GET(`/config/basic`, controller.SiteBasicConfig)
+		api.GET(`/navCategory`, controller.CategoriesInfo)
+		api.GET(`/filmDetail`, controller.FilmDetail)
+		api.GET(`/filmPlayInfo`, controller.FilmPlayInfo)
+		api.GET(`/searchFilm`, controller.SearchFilm)
+		api.GET(`/filmClassify`, controller.FilmClassify)
+		api.GET(`/filmClassifySearch`, controller.FilmTagSearch)
+		//r.GET(`/filmCategory`, controller.FilmCategory) 弃用
+		api.POST(`/login`, controller.Login)
+		api.GET(`/logout`, middleware.AuthToken(), controller.Logout)
+		api.POST(`/changePassword`, middleware.AuthToken(), controller.UserPasswordChange)
+	}
 
 	// 管理员API路由组
-	manageRoute := r.Group(`/manage`)
+	manageRoute := api.Group(`/manage`)
 	manageRoute.Use(middleware.AuthToken())
 	{
 		manageRoute.GET(`/index`, controller.ManageIndex)
