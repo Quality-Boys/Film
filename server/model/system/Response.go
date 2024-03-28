@@ -11,7 +11,7 @@ import (
 */
 
 const (
-	SUCCESS = 1
+	SUCCESS = 0
 	FAILED  = -1
 )
 
