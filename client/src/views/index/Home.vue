@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="hidden-sm-and-up banner_wrap" @touchstart="touchS" @touchend="touchE" >
-      <el-carousel  v-model="data.banner.current" ref="wrap"  :interval="3000" trigger="hover" height="200px" arrow="never" >
+      <el-carousel  v-model="data.banner.current" ref="wrap" :pause-on-hover="false"   :interval="5000" trigger="hover" height="200px" arrow="never" >
         <el-carousel-item v-for="item in banners" :key="item"  >
           <el-image style="width: 100%; height: 100%;" :src="item.picture" fit="fill"/>
           <p class="carousel-title">{{ item.name }}</p>
@@ -11,7 +11,7 @@
     <div class="banner hidden-sm-and-down"
          :style="{background:`url(${data.banner.current.picture})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}">
       <div class="preview">
-        <el-carousel @change="carousel" :interval="3000" height="240px" arrow="always">
+        <el-carousel @change="carousel" :interval="5000" height="240px" arrow="always">
           <el-carousel-item v-for="item in banners" :key="item">
             <el-image style="width: 60%; height: 80%;border-radius: 5px;" :src="item.poster" fit="contain"/>
             <div class="carousel-tags">
@@ -71,6 +71,7 @@ import FilmList from "../../components/index/FilmList.vue";
 import {ElMessage} from "element-plus";
 
 
+
 // 轮播数据拟态
 let banners = [
   {
@@ -119,15 +120,16 @@ const touchS = (e:any)=>{
 const touchE = (e:any)=>{
   data.banner.touch.end = e.changedTouches[0].pageX
   let distance = data.banner.touch.end - data.banner.touch.star
-  console.log(distance)
   if (distance >= 50) {
-    let index = data.banner.touch.index - 1
-    data.banner.touch.index = index >= 0 ? index : banners.length-1
+    // let index = data.banner.touch.index - 1
+    // data.banner.touch.index = index >= 0 ? index : banners.length-1
+    wrap.value?.prev()
   } else if (distance <= -50) {
-    let index = data.banner.touch.index + 1
-    data.banner.touch.index = index <= banners.length - 1 ? index : 0
+    // let index = data.banner.touch.index + 1
+    // data.banner.touch.index = index <= banners.length - 1 ? index : 0
+    wrap.value?.next()
   }
-  wrap.value?.setActiveItem(data.banner.touch.index)
+  // wrap.value?.setActiveItem(data.banner.touch.index)
 }
 
 const data = reactive({
