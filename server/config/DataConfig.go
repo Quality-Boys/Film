@@ -16,7 +16,7 @@ const (
 	MAXGoroutine = 10
 
 	FilmPictureUploadDir = "./static/upload/gallery"
-	FilmPictureUrlPath   = "/upload/pic/poster/"
+	FilmPictureUrlPath   = "/api/upload/pic/poster/"
 	FilmPictureAccess    = "/api/upload/pic/poster/"
 )
 
