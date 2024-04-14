@@ -42,6 +42,9 @@
           </div>
         </Transition>
       </div>
+     <div class="login_link">
+       <a href="/UserLogin">登录</a>
+     </div>
       <!--        <span style="color:#777; font-weight: bold">|</span>-->
       <a href="/search" class="hidden-md-and-up">
         <el-icon style="font-size: 18px">
