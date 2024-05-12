@@ -3,6 +3,7 @@ module server
 go 1.20
 
 require (
+	github.com/apistd/uni-go-sdk v0.0.2
 	github.com/gin-gonic/gin v1.9.0
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/golang-jwt/jwt/v5 v5.1.0

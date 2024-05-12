@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
+	"net/http"
 	"server/config"
 	"server/logic"
 	"server/model/system"
@@ -100,4 +101,21 @@ func UserInfo(c *gin.Context) {
 	// 通过用户ID获取用户基本信息
 	info := logic.UL.GetUserInfo(uc.UserID)
 	system.Success(info, "成功获取用户信息", c)
+}
+
+func SendSmsCode(c *gin.Context) {
+	var params map[string]string
+	err := c.ShouldBindJSON(&params)
+	if err != nil {
+		system.Failed("params err", c)
+		return
+	}
+	message, err := system.SendMessage(params["phone"])
+	if err != nil {
+		system.Failed("send err", c)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"message": message,
+	})
 }
