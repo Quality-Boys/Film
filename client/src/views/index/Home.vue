@@ -1,14 +1,14 @@
 <template>
   <div class="container">
-    <div class="hidden-sm-and-up banner_wrap" @touchstart="touchS" @touchend="touchE" >
+    <!-- <div class="hidden-sm-and-up banner_wrap" @touchstart="touchS" @touchend="touchE" >
       <el-carousel  v-model="data.banner.current" ref="wrap" :pause-on-hover="false"   :interval="5000" trigger="hover" height="200px" arrow="never" >
         <el-carousel-item v-for="item in banners" :key="item"  >
           <el-image style="width: 100%; height: 100%;" :src="item.picture" fit="fill"/>
           <p class="carousel-title">{{ item.name }}</p>
         </el-carousel-item>
       </el-carousel>
-    </div>
-    <div class="banner hidden-sm-and-down"
+    </div> -->
+    <!-- <div class="banner hidden-sm-and-down"
          :style="{background:`url(${data.banner.current.picture})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}">
       <div class="preview">
         <el-carousel @change="carousel" :interval="5000" height="240px" arrow="always">
@@ -22,7 +22,7 @@
           </el-carousel-item>
         </el-carousel>
       </div>
-    </div>
+    </div> -->
     <div class="content_item" v-for="item in data.info.content">
       <template v-if="item.nav.show">
         <el-row class="row-bg  cus_nav" justify="space-between">

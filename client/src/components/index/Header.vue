@@ -42,11 +42,8 @@
           </div>
         </Transition>
       </div>
-      <div class="nav_link">
-       <a href="/">登录</a>
-       <template v-for="n in data.nav">
-         <a :href="`/filmClassify?Pid=${n.id}`">{{ n.name }}</a>
-       </template>
+     <div class="login_link">
+       <a href="/UserLogin">登录</a>
      </div>
       <!--        <span style="color:#777; font-weight: bold">|</span>-->
       <a href="/search" class="hidden-md-and-up">
