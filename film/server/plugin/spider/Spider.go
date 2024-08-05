@@ -41,6 +41,7 @@ func HandleCollect(id string, h int) error {
 		//if !system.ExistsCategoryTree() {
 		//	CollectCategory(s)
 		//}
+		log.Println("collect category")
 		CollectCategory(s)
 	}
 
