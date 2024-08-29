@@ -6,7 +6,6 @@ import (
 	"gorm.io/gorm"
 	"log"
 	"path/filepath"
-	redis "pkg/mod/github.com/redis/go-redis/v9@v9.0.2"
 	"regexp"
 	"server/config"
 	"server/plugin/common/util"
