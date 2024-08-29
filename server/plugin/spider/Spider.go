@@ -101,6 +101,7 @@ func HandleCollect(id string, h int) error {
 				system.SyncFilmPicture()
 			}
 			// 每次成功执行完都清理redis中的相关API接口数据缓存
+			log.Println("图片同步完成")
 			clearCache()
 		}
 
