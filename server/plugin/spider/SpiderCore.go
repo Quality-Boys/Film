@@ -65,7 +65,7 @@ func (jc *JsonCollect) GetPageCount(r util.RequestInfo) (count int, err error) {
 	//  判断请求结果是否为空, 如果为空直接输出错误并终止
 	if len(r.Resp) <= 0 {
 		err = errors.New("response is empty")
-		return
+		return 0, err
 	}
 	// 获取pageCount
 	res := collect.CommonPage{}
@@ -74,7 +74,8 @@ func (jc *JsonCollect) GetPageCount(r util.RequestInfo) (count int, err error) {
 		return
 	}
 	count = int(res.PageCount)
-	return
+	log.Println("片源页数：", count)
+	return count, err
 }
 
 // GetFilmDetail 通过 RequestInfo 获取并解析出对应的 MovieDetail list
@@ -110,7 +111,7 @@ func (jc *JsonCollect) GetFilmDetail(r util.RequestInfo) (list []system.MovieDet
 
 	// 处理details信息
 	list = conver.ConvertFilmDetails(detailPage.List)
-	return
+	return list, err
 }
 
 // ------------------------------------------------- XML Collect -------------------------------------------------

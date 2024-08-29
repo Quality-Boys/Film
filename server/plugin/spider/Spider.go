@@ -38,11 +38,9 @@ func HandleCollect(id string, h int) error {
 	// 如果是主站点且状态为启用则先获取分类tree信息
 	if s.Grade == system.MasterCollect && s.State {
 		// 是否存在分类树信息, 不存在则获取
-		//if !system.ExistsCategoryTree() {
-		//	CollectCategory(s)
-		//}
-		CollectCategory(s)
-		log.Println("collect category")
+		if !system.ExistsCategoryTree() {
+			CollectCategory(s)
+		}
 	}
 
 	// 生成 RequestInfo
