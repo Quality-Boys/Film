@@ -148,9 +148,9 @@ func SyncFilmPicture() {
 		vp := VirtualPicture{}
 		_ = json.Unmarshal([]byte(s.Member.(string)), &vp)
 		// 判断当前影片是否已经同步过图片, 如果已经同步则直接跳过后续逻辑
-		//if ExistFileInfoByRid(vp.Id) {
-		//	continue
-		//}
+		if ExistFileInfoByRid(vp.Id) {
+			continue
+		}
 		// 将图片同步到服务器中
 		fileName, err := util.SaveOnlineFile(vp.Link, config.FilmPictureUploadDir)
 		if err != nil {
