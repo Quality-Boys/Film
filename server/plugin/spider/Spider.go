@@ -58,6 +58,7 @@ func HandleCollect(id string, h int) error {
 	pageCount, err := spiderCore.GetPageCount(r)
 	// 分页页数失败 则再进行一次尝试
 	if err != nil {
+		log.Println("获取分页错误")
 		// 如果第二次获取分页页数依旧获取失败则关闭当前采集任务
 		pageCount, err = spiderCore.GetPageCount(r)
 		if err != nil {
