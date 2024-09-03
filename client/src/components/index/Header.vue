@@ -3,7 +3,7 @@
     <!-- 左侧logo以及搜索 -->
     <div class="nav_left">
       <img class="logo" src="/src/assets/image/logo.png">
-      <el-avatar class="logo" :size="45" :src="data.site.logo" alt="茶杯狐"/>
+<!--      <el-avatar class="logo" :size="45" :src="data.site.logo" alt="茶杯狐"/>-->
       <a href="/" class="site">{{ data.site.siteName }}</a>
       <div class="search_group">
         <input v-model="keyword" @keydown="(e)=>{e.keyCode == 13 && searchFilm()}" placeholder="搜索 动漫,剧集,电影 "
