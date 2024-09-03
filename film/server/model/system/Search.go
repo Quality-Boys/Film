@@ -3,10 +3,10 @@ package system
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 	"log"
 	"math"
+	redis "pkg/mod/github.com/redis/go-redis/v9@v9.0.2"
 	"reflect"
 	"regexp"
 	"server/config"
@@ -157,7 +157,7 @@ func SaveSearchTag(search SearchInfo) {
 		case "Sort":
 			if tagCount == 0 {
 				tags := []redis.Z{
-					{3, "时间排序:update_stamp"},
+					//{3, "时间排序:update_stamp"},
 					{2, "人气排序:hits"},
 					{1, "评分排序:score"},
 					{0, "最新上映:release_stamp"},
