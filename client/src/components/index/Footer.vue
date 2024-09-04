@@ -16,7 +16,7 @@
 .custom-footer {
     text-align: center;
     width: 100%;
-    height: 30px;
+    height: 50px;
     text-align: center;
     line-height: 15px;
     font-size: 15px;
