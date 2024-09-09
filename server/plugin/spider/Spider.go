@@ -91,6 +91,7 @@ func HandleCollect(id string, h int) error {
 			// 如果分页数量较大则开启协程
 			ConcurrentPageSpider(pageCount, s, h, rid, collectFilm)
 		}
+		log.Println("视频资源采集完成")
 		// 视频数据采集完成后同步相关信息到mysql
 		if s.Grade == system.MasterCollect {
 			// 执行影片信息更新操作
