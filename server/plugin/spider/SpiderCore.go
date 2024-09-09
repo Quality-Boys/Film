@@ -30,7 +30,7 @@ type JsonCollect struct {
 }
 
 // GetCategoryTree 获取分类树形数据
-func (jc *JsonCollect) GetCategoryTree(r util.RequestInfo) (*system.CategoryTree, error) {
+func (jc *JsonCollect) GetCategoryTree(r util.RequestInfo) (*system.CategoryTree, int64, error) {
 	// 设置请求参数信息
 	r.Params.Set(`ac`, "list")
 	r.Params.Set(`pg`, "1")
@@ -40,18 +40,18 @@ func (jc *JsonCollect) GetCategoryTree(r util.RequestInfo) (*system.CategoryTree
 	filmListPage := collect.FilmListPage{}
 	if len(r.Resp) <= 0 {
 		log.Println("filmListPage 数据获取异常 : Resp Is Empty")
-		return nil, errors.New("filmListPage 数据获取异常 : Resp Is Empty")
+		return nil, -1, errors.New("filmListPage 数据获取异常 : Resp Is Empty")
 	}
 	err := json.Unmarshal(r.Resp, &filmListPage)
 	// 获取分类列表信息
 	cl := filmListPage.Class
 	// 组装分类数据信息树形结构
-	tree := conver.GenCategoryTree(cl)
+	tree, rid := conver.GenCategoryTree(cl)
 
 	// 将分类列表信息存储到redis
 	_ = collect.SaveFilmClass(cl)
 
-	return tree, err
+	return tree, rid, err
 }
 
 // GetPageCount 获取分页总页数
@@ -79,7 +79,7 @@ func (jc *JsonCollect) GetPageCount(r util.RequestInfo) (count int, err error) {
 }
 
 // GetFilmDetail 通过 RequestInfo 获取并解析出对应的 MovieDetail list
-func (jc *JsonCollect) GetFilmDetail(r util.RequestInfo) (list []system.MovieDetail, err error) {
+func (jc *JsonCollect) GetFilmDetail(r util.RequestInfo, rid int64) (list []system.MovieDetail, err error) {
 	// 防止json解析异常引发panic
 	defer func() {
 		if e := recover(); e != nil {
@@ -110,7 +110,7 @@ func (jc *JsonCollect) GetFilmDetail(r util.RequestInfo) (list []system.MovieDet
 	//}
 
 	// 处理details信息
-	list = conver.ConvertFilmDetails(detailPage.List)
+	list = conver.ConvertFilmDetails(detailPage.List, rid)
 	return list, err
 }
 

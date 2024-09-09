@@ -27,6 +27,7 @@ var spiderCore = &JsonCollect{}
 // HandleCollect 影视采集  id-采集站ID h-时长/h
 func HandleCollect(id string, h int) error {
 	// 1. 首先通过ID获取对应采集站信息
+	var rid int64
 	s := system.FindCollectSourceById(id)
 	if s == nil {
 		log.Println("Cannot Find Collect Source Site")
@@ -37,10 +38,14 @@ func HandleCollect(id string, h int) error {
 	}
 	// 如果是主站点且状态为启用则先获取分类tree信息
 	if s.Grade == system.MasterCollect && s.State {
-		// 是否存在分类树信息, 不存在则获取
-		if !system.ExistsCategoryTree() {
-			CollectCategory(s)
+		rid = CollectCategory(s)
+		if rid != -1 {
+			log.Println("存在伦理片, ID:", rid)
 		}
+		// 是否存在分类树信息, 不存在则获取
+		//if !system.ExistsCategoryTree() {
+		//	CollectCategory(s)
+		//}
 	}
 
 	// 生成 RequestInfo
@@ -73,14 +78,14 @@ func HandleCollect(id string, h int) error {
 		if s.Interval > 500 {
 			// 少量数据不开启协程
 			for i := 1; i <= pageCount; i++ {
-				collectFilm(s, h, i)
+				collectFilm(s, h, i, rid)
 				// 执行一次采集后休眠指定时长
 				time.Sleep(time.Duration(s.Interval) * time.Millisecond)
 			}
 		} else if pageCount <= config.MAXGoroutine*2 {
 			// 少量数据不开启协程
 			for i := 1; i <= pageCount; i++ {
-				collectFilm(s, h, i)
+				collectFilm(s, h, i, rid)
 			}
 		} else {
 			// 如果分页数量较大则开启协程
@@ -114,22 +119,24 @@ func HandleCollect(id string, h int) error {
 }
 
 // CollectCategory 影视分类采集
-func CollectCategory(s *system.FilmSource) {
+func CollectCategory(s *system.FilmSource) int64 {
 	// 获取分类树形数据
-	categoryTree, err := spiderCore.GetCategoryTree(util.RequestInfo{Uri: s.Uri, Params: url.Values{}})
+	categoryTree, rid, err := spiderCore.GetCategoryTree(util.RequestInfo{Uri: s.Uri, Params: url.Values{}})
 	if err != nil {
 		log.Println("GetCategoryTree Error: ", err)
-		return
+		return -1
 	}
 	// 保存 tree 到redis
 	err = system.SaveCategoryTree(categoryTree)
 	if err != nil {
 		log.Println("SaveCategoryTree Error: ", err)
+		return -1
 	}
+	return rid
 }
 
 // 影视详情采集
-func collectFilm(s *system.FilmSource, h, pg int) {
+func collectFilm(s *system.FilmSource, h, pg int, rid int64) {
 	// 生成请求参数
 	r := util.RequestInfo{Uri: s.Uri, Params: url.Values{}}
 	// 设置分页页数
@@ -139,7 +146,7 @@ func collectFilm(s *system.FilmSource, h, pg int) {
 		r.Params.Set("h", fmt.Sprint(h))
 	}
 	// 执行采集方法 获取影片详情list
-	list, err := spiderCore.GetFilmDetail(r)
+	list, err := spiderCore.GetFilmDetail(r, rid)
 	if err != nil || len(list) <= 0 {
 		log.Println("GetMovieDetail Error: ", err)
 		return
@@ -166,7 +173,7 @@ func collectFilm(s *system.FilmSource, h, pg int) {
 }
 
 // ConcurrentPageSpider 并发分页采集, 不限类型
-func ConcurrentPageSpider(capacity int, s *system.FilmSource, h int, collectFunc func(s *system.FilmSource, hour, pageNumber int)) {
+func ConcurrentPageSpider(capacity int, s *system.FilmSource, h int, collectFunc func(s *system.FilmSource, hour, pageNumber int, rid int64)) {
 	// 开启协程并发执行
 	ch := make(chan int, capacity)
 	waitCh := make(chan int)

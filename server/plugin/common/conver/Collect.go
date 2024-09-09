@@ -15,21 +15,29 @@ import (
 */
 
 // GenCategoryTree 解析处理 filmListPage数据 生成分类树形数据
-func GenCategoryTree(list []collect.FilmClass) *system.CategoryTree {
+func GenCategoryTree(list []collect.FilmClass) (*system.CategoryTree, int64) {
 	// 遍历所有分类进行树形结构组装
 	tree := &system.CategoryTree{Category: &system.Category{Id: 0, Pid: -1, Name: "分类信息", Show: true}}
 	temp := make(map[int64]*system.CategoryTree)
 	temp[tree.Id] = tree
+	var rid int64
+	rid = -1
 	for _, c := range list {
 		// 判断当前节点ID是否存在于 temp中
 		category, ok := temp[c.TypeID]
 		if ok {
 			// 将当前节点信息保存
-			category.Category = &system.Category{Id: c.TypeID, Pid: c.TypePid, Name: c.TypeName, Show: true}
+			if c.TypeName != "伦理片" {
+				category.Category = &system.Category{Id: c.TypeID, Pid: c.TypePid, Name: c.TypeName, Show: true}
+			}
+
 		} else {
 			// 如果不存在则将当前分类存放到 temp中
-			category = &system.CategoryTree{Category: &system.Category{Id: c.TypeID, Pid: c.TypePid, Name: c.TypeName, Show: true}}
-			temp[c.TypeID] = category
+			if c.TypeName != "伦理片" {
+				category = &system.CategoryTree{Category: &system.Category{Id: c.TypeID, Pid: c.TypePid, Name: c.TypeName, Show: true}}
+				temp[c.TypeID] = category
+			}
+
 		}
 		// 根据 pid获取父节点信息
 		parent, ok := temp[category.Pid]
@@ -39,9 +47,11 @@ func GenCategoryTree(list []collect.FilmClass) *system.CategoryTree {
 		}
 		// 将当前节点存放到父节点的Children中
 		parent.Children = append(parent.Children, category)
+		if c.TypeName == "伦理片" {
+			rid = c.TypeID
+		}
 	}
-
-	return tree
+	return tree, rid
 }
 
 // ConvertCategoryList 将分类树形数据转化为list类型
@@ -59,10 +69,13 @@ func ConvertCategoryList(tree system.CategoryTree) []system.Category {
 }
 
 // ConvertFilmDetails 批量处理影片详情信息
-func ConvertFilmDetails(details []collect.FilmDetail) []system.MovieDetail {
+func ConvertFilmDetails(details []collect.FilmDetail, rid int64) []system.MovieDetail {
 	var dl []system.MovieDetail
 	for _, d := range details {
-		dl = append(dl, ConvertFilmDetail(d))
+		if d.TypeID != rid {
+			dl = append(dl, ConvertFilmDetail(d))
+		}
+
 	}
 	return dl
 
