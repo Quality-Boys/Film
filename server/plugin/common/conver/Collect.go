@@ -24,32 +24,30 @@ func GenCategoryTree(list []collect.FilmClass) (*system.CategoryTree, int64) {
 	rid = -1
 	for _, c := range list {
 		// 判断当前节点ID是否存在于 temp中
-		category, ok := temp[c.TypeID]
-		if ok {
-			// 将当前节点信息保存
-			if c.TypeName != "伦理片" {
-				category.Category = &system.Category{Id: c.TypeID, Pid: c.TypePid, Name: c.TypeName, Show: true}
-			}
-
-		} else {
-			// 如果不存在则将当前分类存放到 temp中
-			if c.TypeName != "伦理片" {
-				category = &system.CategoryTree{Category: &system.Category{Id: c.TypeID, Pid: c.TypePid, Name: c.TypeName, Show: true}}
-				temp[c.TypeID] = category
-			}
-
-		}
-		// 根据 pid获取父节点信息
-		parent, ok := temp[category.Pid]
-		if !ok {
-			// 如果不存在父节点存在, 则将父节点存放到temp中
-			temp[c.TypePid] = parent
-		}
-		// 将当前节点存放到父节点的Children中
-		parent.Children = append(parent.Children, category)
 		if c.TypeName == "伦理片" {
 			rid = c.TypeID
 		}
+		if c.TypeName != "伦理片" {
+			category, ok := temp[c.TypeID]
+			if ok {
+				// 将当前节点信息保存
+				category.Category = &system.Category{Id: c.TypeID, Pid: c.TypePid, Name: c.TypeName, Show: true}
+			} else {
+				// 如果不存在则将当前分类存放到 temp中
+				category = &system.CategoryTree{Category: &system.Category{Id: c.TypeID, Pid: c.TypePid, Name: c.TypeName, Show: true}}
+				temp[c.TypeID] = category
+
+			}
+			// 根据 pid获取父节点信息
+			parent, ok := temp[category.Pid]
+			if !ok {
+				// 如果不存在父节点存在, 则将父节点存放到temp中
+				temp[c.TypePid] = parent
+			}
+			// 将当前节点存放到父节点的Children中
+			parent.Children = append(parent.Children, category)
+		}
+
 	}
 	return tree, rid
 }
