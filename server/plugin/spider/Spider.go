@@ -89,7 +89,7 @@ func HandleCollect(id string, h int) error {
 			}
 		} else {
 			// 如果分页数量较大则开启协程
-			ConcurrentPageSpider(pageCount, s, h, collectFilm)
+			ConcurrentPageSpider(pageCount, s, h, rid, collectFilm)
 		}
 		// 视频数据采集完成后同步相关信息到mysql
 		if s.Grade == system.MasterCollect {
@@ -173,7 +173,7 @@ func collectFilm(s *system.FilmSource, h, pg int, rid int64) {
 }
 
 // ConcurrentPageSpider 并发分页采集, 不限类型
-func ConcurrentPageSpider(capacity int, s *system.FilmSource, h int, collectFunc func(s *system.FilmSource, hour, pageNumber int, rid int64)) {
+func ConcurrentPageSpider(capacity int, s *system.FilmSource, h int, rid int64, collectFunc func(s *system.FilmSource, hour, pageNumber int, rid int64)) {
 	// 开启协程并发执行
 	ch := make(chan int, capacity)
 	waitCh := make(chan int)
@@ -196,7 +196,7 @@ func ConcurrentPageSpider(capacity int, s *system.FilmSource, h int, collectFunc
 					break
 				}
 				// 执行对应的采集方法
-				collectFunc(s, h, pg)
+				collectFunc(s, h, pg, rid)
 			}
 		}()
 	}
