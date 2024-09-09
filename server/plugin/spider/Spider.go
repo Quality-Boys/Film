@@ -147,6 +147,7 @@ func collectFilm(s *system.FilmSource, h, pg int, rid int64) {
 	}
 	// 执行采集方法 获取影片详情list
 	list, err := spiderCore.GetFilmDetail(r, rid)
+	log.Println("收集到的数量: ", len(list))
 	if err != nil || len(list) <= 0 {
 		log.Println("GetMovieDetail Error: ", err)
 		return
