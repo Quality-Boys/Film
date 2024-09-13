@@ -23,8 +23,6 @@
         </el-carousel>
       </div>
     </div> -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8405126990681823"
-            crossorigin="anonymous"></script>
     <div class="content_item" v-for="item in data.info.content">
       <template v-if="item.nav.show">
         <el-row class="row-bg  cus_nav" justify="space-between">
