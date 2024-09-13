@@ -68,12 +68,6 @@ const getFilmData = () => {
 
 onMounted(() => {
   getFilmData()
-  const script = document.createElement('script');
-  script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8405126990681823";
-  script.async = true;
-  script.crossOrigin = "anonymous";
-  document.head.appendChild(script);
-  // document.body.appendChild(script);
 })
 </script>
 
