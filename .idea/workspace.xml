@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a524473e-9463-4ab1-8eec-877855c22a9f" name="Changes" comment="cancel login button">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+    <list default="true" id="a524473e-9463-4ab1-8eec-877855c22a9f" name="Changes" comment="1.delete guanggao">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/film/server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/film/server/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/film/server/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/film/server/go.sum" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,29 +51,53 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "git-widget-placeholder": "master",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "F:/login",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "D:\\GoLand 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Go Build.go build server.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/GOWorkspace/src/client/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\GoLand 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\GOWorkspace\src\client\public" />
+      <recent name="F:\GOWorkspace\src\client" />
+      <recent name="F:\GOWorkspace\src\client\src\assets\image" />
       <recent name="F:\GOWorkspace\Film" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\GOWorkspace\src\client\public" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="src" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/server/main.go" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build server" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -102,18 +126,32 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="config host port" />
-    <MESSAGE value="test api" />
-    <MESSAGE value="add api router group" />
-    <MESSAGE value="debug" />
-    <MESSAGE value="update" />
-    <MESSAGE value="update mysql config" />
-    <MESSAGE value="api router add api group" />
-    <MESSAGE value="update FilmPictureUrlPath" />
-    <MESSAGE value="fix GetRelateMovieBasicInfo sql" />
-    <MESSAGE value="merge" />
     <MESSAGE value="cancel login button" />
-    <option name="LAST_COMMIT_MESSAGE" value="cancel login button" />
+    <MESSAGE value="fix collect category" />
+    <MESSAGE value="1.fix SyncFilmPicture" />
+    <MESSAGE value="1.debug" />
+    <MESSAGE value="1.update keyword,title,description" />
+    <MESSAGE value="1.cancel update_stamp" />
+    <MESSAGE value="1.add redis" />
+    <MESSAGE value="1.update logo" />
+    <MESSAGE value="1.add baidu tag" />
+    <MESSAGE value="1.add bei an" />
+    <MESSAGE value="1.add LA script" />
+    <MESSAGE value="1.update target" />
+    <MESSAGE value="1.filter lun li" />
+    <MESSAGE value="1.debug collect film" />
+    <MESSAGE value="1.add debug log" />
+    <MESSAGE value="1.add google script" />
+    <MESSAGE value="1.delete google script" />
+    <MESSAGE value="1.baidu_union_verify" />
+    <MESSAGE value="1.add Popunder" />
+    <MESSAGE value="1.add banner" />
+    <MESSAGE value="1.delete banner" />
+    <MESSAGE value="1.add juicyads verify" />
+    <MESSAGE value="1.add verify" />
+    <MESSAGE value="1.add guanggao" />
+    <MESSAGE value="1.delete guanggao" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.delete guanggao" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
@@ -125,8 +163,12 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/client/src/components/index/Header.vue</url>
           <line>79</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/film/server/model/collect/FilmDetail.go</url>
+          <line>35</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
